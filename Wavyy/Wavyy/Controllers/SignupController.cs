@@ -1,7 +1,7 @@
 ﻿using Wavyy.Models;
+using Wavyy.Data;
 using Wavyy.ViewModels;
-using System.Web.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Wavyy.Controllers
 {
@@ -24,7 +24,15 @@ namespace Wavyy.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+                User newUser = new User();
+                newUser.Username = newUserViewModel.Username;
+                newUser.Email = newUserViewModel.Email;
+                newUser.Password = newUserViewModel.Password;
+
+                context.Users.Add(newUser);
+                context.SaveChanges();
+
+                return Redirect("/Welcome");
             }
             return View();
         }
