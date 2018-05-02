@@ -14,13 +14,13 @@ namespace Wavyy.Controllers
             context = dbContext;
         }
 
-        public ActionResult Index()
+        public IActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Index(NewUserViewModel newUserViewModel)
+        public IActionResult Index(NewUserViewModel newUserViewModel)
         {
             if (ModelState.IsValid)
             {
