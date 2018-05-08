@@ -32,8 +32,14 @@ namespace Wavyy.Controllers
                 context.Users.Add(newUser);
                 context.SaveChanges();
 
-                return Redirect("/Welcome");
+                return Redirect("/Signup/Welcome");
             }
+
+            return View(newUserViewModel);
+        }
+
+        public IActionResult Welcome()
+        {
             return View();
         }
     }
