@@ -13,4 +13,4 @@ namespace Wavyy.Models
         [Required]
         public string Password { get; set; }
     }
-}
+} 
