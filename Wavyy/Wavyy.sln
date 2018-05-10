@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2011
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wavyy", "Wavyy\Wavyy.csproj", "{222FDDAC-7BE3-45B9-A701-092E8A888EA4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wavyy", "Wavyy\Wavyy.csproj", "{AB909D56-694D-49C4-A932-31B3B9AB2CF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{222FDDAC-7BE3-45B9-A701-092E8A888EA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{222FDDAC-7BE3-45B9-A701-092E8A888EA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{222FDDAC-7BE3-45B9-A701-092E8A888EA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{222FDDAC-7BE3-45B9-A701-092E8A888EA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB909D56-694D-49C4-A932-31B3B9AB2CF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB909D56-694D-49C4-A932-31B3B9AB2CF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB909D56-694D-49C4-A932-31B3B9AB2CF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB909D56-694D-49C4-A932-31B3B9AB2CF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {F5BAC958-7A01-4AF1-9653-84B079FA9C30}
+		SolutionGuid = {D3C50CBC-3BCA-43D0-A28C-B05F6ED6336E}
 	EndGlobalSection
 EndGlobal
