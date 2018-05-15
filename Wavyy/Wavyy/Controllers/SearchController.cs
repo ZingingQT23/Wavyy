@@ -12,17 +12,34 @@ namespace Wavyy.Controllers
     {
         static HttpClient client = new HttpClient();
 
-        private const string URL = "https://api-endpoint.igdb.com/";
-        private string userKey = "befc5535687e5de93cfd50d93bf10669";
+        private const string URI = "https://api-2445582011268.apicast.io/";
+        private const string userKey = "befc5535687e5de93cfd50d93bf10669";
 
-        private static async Task RunAsync()
+        private static void FormatClient()
         {
-            // Update port # in the following line.
-            client.BaseAddress = new Uri(URL);
+            client.BaseAddress = new Uri(URI);
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("user-key", "befc5535687e5de93cfd50d93bf10669");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Add("user-key", userKey);
+        }
+
+        static async Task<string> MakeRequest(string input)
+        {
+            HttpResponseMessage response = await client.GetAsync(input);
+            
+            string result = string.Empty;
+
+            if (response.IsSuccessStatusCode)
+            {
+                result = await response.Content.ReadAsStringAsync();
+            }
+            else
+            {
+                result = response.StatusCode.ToString() + response.ReasonPhrase.ToString();
+                return result;
+            }
+
+            return result;
         }
 
         public IActionResult Index()
@@ -31,22 +48,16 @@ namespace Wavyy.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(SearchTerms searchTerms)
+        public async Task<IActionResult> Index(SearchTerms searchTerms)
         {
-            searchTerms.UserInput = "?search=" + searchTerms.UserInput;
-
-            HttpResponseMessage response = client.GetAsync(searchTerms.UserInput).Result;
-
-            if (response.IsSuccessStatusCode)
+            if (client.BaseAddress == null)
             {
-                // Parse the response body. Blocking!
-                ViewBag.Message = response.Content.ReadAsStringAsync();
+                FormatClient();
+            }
 
-            }
-            else
-            {
-                ViewBag.Message = ("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
-            }
+            searchTerms.UserInput = "games/?search=" + searchTerms.UserInput;
+
+            ViewBag.Message = await MakeRequest(searchTerms.UserInput);
 
             return View();
         }
