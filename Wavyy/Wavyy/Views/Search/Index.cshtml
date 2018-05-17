@@ -1,8 +1,17 @@
 ﻿@model Wavyy.Models.SearchTerms
 
-<form asp-controller="Search" asp-action="Index" method="post">
-    <div class="form-group"><input asp-for="UserInput" /></div>
-    <div class="form-group"><input type="submit" /></div>  
+<form asp-controller="Search" asp-action="ByName" method="post">
+    <div class="form-group">
+        <input class="form-control" asp-for="UserInput" />
+        <input class="form-control" type="submit" value="Search By Name" />
+    </div>  
+</form>
+
+<form asp-controller="Search" asp-action="ById" method="post">
+    <div class="form-group">
+        <input class="form-control" asp-for="UserInput" />
+        <input class="form-control" type="submit" value="Search By ID" />
+    </div>
 </form>
 
 @ViewBag.Message
