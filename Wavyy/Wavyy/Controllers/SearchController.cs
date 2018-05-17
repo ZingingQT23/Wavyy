@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Wavyy.Models;
+using Wavyy.Models.Games;
 
 namespace Wavyy.Controllers
 {
@@ -15,12 +17,15 @@ namespace Wavyy.Controllers
         private const string URI = "https://api-2445582011268.apicast.io/";
         private const string userKey = "***REMOVED***";
 
-        private static void FormatClient()
+        private static void CheckClient()
         {
-            client.BaseAddress = new Uri(URI);
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("user-key", userKey);
+            if (client.BaseAddress == null)
+            {
+                client.BaseAddress = new Uri(URI);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Add("user-key", userKey);
+            }
         }
 
         static async Task<string> MakeRequest(string input)
@@ -48,18 +53,32 @@ namespace Wavyy.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(SearchTerms searchTerms)
+        public async Task<IActionResult> ByName(SearchTerms searchTerms)
         {
-            if (client.BaseAddress == null)
-            {
-                FormatClient();
-            }
+            CheckClient();
 
             searchTerms.UserInput = "games/?search=" + searchTerms.UserInput;
 
             ViewBag.Message = await MakeRequest(searchTerms.UserInput);
 
-            return View();
+            return View("Index");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ById(SearchTerms searchTerms)
+        {
+            CheckClient();
+
+            string request = "/games/" + searchTerms.UserInput + "?fields=name,id,slug,summary,cover,platforms";
+
+            string response = await MakeRequest(request);
+
+            List<AddGameViewModel> addGameViewModel = JsonConvert.DeserializeObject<List<AddGameViewModel>>(response);
+
+            ViewBag.Message = response;
+
+            return View("Index");
+        }
+
     }
 }
