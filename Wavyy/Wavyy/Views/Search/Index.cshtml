@@ -2,16 +2,15 @@
 
 <form asp-controller="Search" asp-action="ByName" method="post">
     <div class="form-group">
-        <input class="form-control" asp-for="UserInput" />
-        <input class="form-control" type="submit" value="Search By Name" />
-    </div>  
-</form>
-
-<form asp-controller="Search" asp-action="ById" method="post">
-    <div class="form-group">
-        <input class="form-control" asp-for="UserInput" />
-        <input class="form-control" type="submit" value="Search By ID" />
+        <input asp-for="UserInput" />
+        <input type="submit" value="Search By Name" />
     </div>
 </form>
+
+<br />
+@if (TempData["SearchResults"] != null)
+{
+    await Html.RenderPartialAsync("SearchResults", new List<Wavyy.Models.Games.Game>());
+}
 
 @ViewBag.Message
