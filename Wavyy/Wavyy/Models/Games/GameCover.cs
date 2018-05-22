@@ -2,6 +2,7 @@
 
 namespace Wavyy.Models.Games
 {
+    [JsonObject]
     public class GameCover
     {
         [JsonProperty(PropertyName = "url")]
