@@ -3,10 +3,11 @@ using System.Collections.Generic;
 
 namespace Wavyy.Models.Games
 {
+    [JsonObject]
     public class AddGameViewModel
     {
         [JsonProperty(PropertyName = "id")]
-        public int ID { get; set; }
+        public int DbId { get; set; }
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
         [JsonProperty(PropertyName = "slug")]
