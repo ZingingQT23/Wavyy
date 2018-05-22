@@ -22,6 +22,12 @@ namespace Wavyy.Models.Games
             Summary = addGameViewModel.Summary;
             Cover = addGameViewModel.Cover;
             Platforms = addGameViewModel.Platforms;
+          
+            if (Cover == null)
+            {
+                Cover = new GameCover();
+                Cover.Url = "";
+            }
         }
 
     }
