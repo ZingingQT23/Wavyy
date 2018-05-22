@@ -1,11 +1,16 @@
 ﻿@model Wavyy.Models.SearchTerms
 
-<form asp-controller="Search" asp-action="ByName" method="post">
-    <div class="form-group">
-        <input asp-for="UserInput" />
-        <input type="submit" value="Search By Name" />
-    </div>
-</form>
+<div class="container">
+    <form asp-controller="Search" asp-action="ByName" method="post">
+
+        <div class="input-group input-group-lg">
+            <input type="text" class="form-control" asp-for="UserInput" placeholder="Search">
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            </div>
+        </div>
+    </form>
+</div>
 
 <br />
 @if (TempData["SearchResults"] != null)
