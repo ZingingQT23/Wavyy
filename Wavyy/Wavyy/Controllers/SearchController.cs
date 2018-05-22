@@ -16,6 +16,8 @@ namespace Wavyy.Controllers
 
         private const string URI = "https://api-2445582011268.apicast.io/";
         private const string userKey = "befc5535687e5de93cfd50d93bf10669";
+        private const string byName = "/games/?search={0}";
+        private const string byId = "/games/{0}?fields=name,id,slug,summary,cover,platforms";
 
         private static void CheckClient()
         {
@@ -47,6 +49,29 @@ namespace Wavyy.Controllers
             return result;
         }
 
+        public async Task<List<Game>> PopulateGames(List<DbId> dbIds)
+        {
+            List<Game> searchResults = new List<Game>();
+
+            //TODO: check if items with those DbIds exist already in local db, if yes, add to searchResults, for the rest:
+            foreach (DbId dbId in dbIds)
+            {
+                string json = await MakeRequest(string.Format(byId, dbId.Id));
+
+                List<AddGameViewModel> addGameViewModel = JsonConvert.DeserializeObject<List<AddGameViewModel>>(json);
+
+                Game newGame = new Game(addGameViewModel[0]);
+
+                searchResults.Add(newGame);
+
+                //TODO: context.Games.Add(newGame);
+            }
+
+            //TODO: context.SaveChanges();
+
+            return searchResults;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -57,28 +82,15 @@ namespace Wavyy.Controllers
         {
             CheckClient();
 
-            searchTerms.UserInput = "games/?search=" + searchTerms.UserInput;
+            string json = await MakeRequest(string.Format(byName, searchTerms.UserInput));
 
-            ViewBag.Message = await MakeRequest(searchTerms.UserInput);
+            List<DbId> dbIds = JsonConvert.DeserializeObject<List<DbId>>(json);
 
-            return View("Index");
-        }
+            List<Game> searchResults = await PopulateGames(dbIds);
 
-        [HttpPost]
-        public async Task<IActionResult> ById(SearchTerms searchTerms)
-        {
-            CheckClient();
-
-            string request = "/games/" + searchTerms.UserInput + "?fields=name,id,slug,summary,cover,platforms";
-
-            string response = await MakeRequest(request);
-
-            List<AddGameViewModel> addGameViewModel = JsonConvert.DeserializeObject<List<AddGameViewModel>>(response);
-
-            ViewBag.Message = response;
+            TempData["SearchResults"] = searchResults;
 
             return View("Index");
         }
-
     }
 }
