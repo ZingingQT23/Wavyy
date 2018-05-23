@@ -15,18 +15,19 @@ namespace Wavyy.Controllers
         static HttpClient client = new HttpClient();
 
         private const string URI = "https://api-2445582011268.apicast.io/";
-        private const string userKey = "befc5535687e5de93cfd50d93bf10669";
         private const string byName = "/games/?search={0}";
         private const string byId = "/games/{0}?fields=name,id,slug,summary,cover,platforms";
+
 
         private static void CheckClient()
         {
             if (client.BaseAddress == null)
             {
+                
                 client.BaseAddress = new Uri(URI);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Add("user-key", userKey);
+                client.DefaultRequestHeaders.Add("user-key", System.IO.File.ReadAllText(@"C:\Users\Dylan\Wavyy\uK.txt").ToString());
             }
         }
 
