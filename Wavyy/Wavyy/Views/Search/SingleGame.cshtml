@@ -1,0 +1,9 @@
+﻿@model Wavyy.Models.Games.Game
+
+@{ var thisGame = (dynamic)TempData["ThisGame"];}
+
+<div class="container">
+    <div class="card">
+<img src="@thisGame.Cover.Url" />
+    </div> 
+</div>
