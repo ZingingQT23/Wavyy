@@ -1,12 +1,17 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Wavyy.Models;
+using Wavyy.Models.Games;
 
 namespace Wavyy.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class WavyyDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public new DbSet<ApplicationUser> Users { get; set; }
+        public DbSet<Game> Games { get; set; }
+        public DbSet<Collection> Collections { get; set; }
+
+        public WavyyDbContext(DbContextOptions<WavyyDbContext> options)
             : base(options)
         {
         }
