@@ -3,7 +3,7 @@
 namespace Wavyy.Models.Games
 {
     [JsonObject]
-    public class GameCover
+    public class GameImage
     {
         [JsonProperty(PropertyName = "url")]
         public string Url { get; set; }
