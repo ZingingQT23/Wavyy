@@ -15,7 +15,7 @@
 <br />
 @if (TempData["SearchResults"] != null)
 {
-    await Html.RenderPartialAsync("SearchResults", new List<Wavyy.Models.Games.Game>());
+    await Html.RenderPartialAsync("SearchResultsPartial", new List<Wavyy.Models.Games.Game>());
 }
 
 @ViewBag.Message
