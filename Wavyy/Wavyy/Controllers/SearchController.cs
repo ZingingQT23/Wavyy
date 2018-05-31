@@ -16,7 +16,8 @@ namespace Wavyy.Controllers
 
         private const string URI = "https://api-2445582011268.apicast.io/";
         private const string byName = "/games/?search={0}";
-        private const string byId = "/games/{0}?fields=name,id,slug,summary,cover,platforms";
+        private const string byId = "/games/{0}?fields=name,id,slug,summary,cover,platforms,esrb,pegi,storyline,first_release_date,screenshots,artworks,genres,developers,publishers";
+        private const string forVersions = "/game_versions/?fields=games.name&filter[games][exists]=1&filter[game][eq]={0}&expand=games";
 
 
         private static void CheckClient()
@@ -92,6 +93,22 @@ namespace Wavyy.Controllers
             TempData["SearchResults"] = searchResults;
 
             return View("Index");
+        }
+
+        public async Task<IActionResult> SingleGame(int id)
+        {
+            //TODO: Convert these requests to query the dbcontext instead of the api
+
+
+            string json = await MakeRequest(string.Format(byId, id));
+
+            List<AddGameViewModel> addGameViewModel = JsonConvert.DeserializeObject<List<AddGameViewModel>>(json);
+
+            Game thisGame = new Game(addGameViewModel[0]);
+
+            TempData["ThisGame"] = thisGame;
+
+            return View();
         }
     }
 }
