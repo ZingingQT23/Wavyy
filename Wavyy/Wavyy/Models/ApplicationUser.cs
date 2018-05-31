@@ -6,6 +6,7 @@ namespace Wavyy.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public List<Collection> UserCollections { get; set; }
+        //public List<Collection> UserCollections { get; set; }
+        //public List<UserGame> UserGames { get; set; }
     }
 }
