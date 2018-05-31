@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <h5 class="card-title">@game.Name</h5>
                         <p class="card-text"></p>
-                        <a href="#" class="btn btn-primary">Go</a>
+                        <form asp-controller="Search" asp-action="SingleGame"><input type="hidden" asp-for="id" value="@game.DbId"><input class="btn" type="submit" value="View Game" /></form>
                     </div>
                 </div>
             </div>
