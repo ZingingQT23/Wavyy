@@ -28,7 +28,7 @@ namespace Wavyy.Controllers
                 client.BaseAddress = new Uri(URI);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Add("user-key", System.IO.File.ReadAllText(@"C:\Users\Dylan\Wavyy\uK.txt").ToString());
+                client.DefaultRequestHeaders.Add("user-key", System.IO.File.ReadAllText(@"C:\Users\Corey\Desktop\uK.txt").ToString());
             }
         }
 

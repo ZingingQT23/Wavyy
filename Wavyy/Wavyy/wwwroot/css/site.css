@@ -1,45 +1,76 @@
-﻿body {
-    padding-top: 90px;
-    padding-bottom: 20px;
-}
+﻿@import url('https://fonts.googleapis.com/css?family=Audiowide|Exo+2');
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
+body {
+    color: #fff;
+    background-color: #161616;
+    font-family: 'Exo 2', sans-serif;
+}
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 10px 10px 30px 10px;
+}
+#top, #bottom, #left, #right {
+    background: #00a39b;
+    position: fixed;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+#left, #right {
+    top: 0;
+    bottom: 0;
+    width: 10px;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
+#left {
+    left: 0;
 }
 
-/* QR code generator */
-#qrCode {
-    margin: 15px;
+#right {
+    right: 0;
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
+#top, #bottom {
+    left: 0;
+    right: 0;
+    height: 10px;
+}
+
+#top {
+    top: 0;
+}
+
+#bottom {
+    bottom: 0;
+    z-index: 800;
+}
+h1, h2, h3, h4, h5 {
+    font-family: 'Audiowide', cursive;
+}
+p {
+    font-family: 'Exo 2', sans-serif;
+}
+a {
+    color: #e6e6e6;
+}
+    a:hover {
+        color: #cf0079;
     }
-}
 
 .navbar-default {
-    background-color:aquamarine;
+    background-color: rgba(22,22,22,0.9);
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
+    .navbar-default .navbar-nav > li > a {
+        color: #00a39b;
+    }
+        .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+            border-bottom: 3px solid #cf0079;
+            color: #02a29b;
+        }
 
 .navbar {
-    min-height: 80px;
+    min-height: 83px;
+    border:none;
 }
 
 .navbar-brand {
@@ -54,7 +85,122 @@
     padding: 9px 10px !important;
 }
 
-@media (min-width: 768px) {
+#homeMainImage {
+    background-image: url('/images/home-image-main.jpg');
+    background-size: cover;
+}
+#internalImage {
+    background-image: url('/images/aesthetic.jpg');
+    background-size: cover;
+    min-height: 400px;
+}
+
+.section:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 20rem;
+    max-width: calc(100% - 1rem);
+    height: .0625rem;
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(207, 0, 121, 0)), color-stop(47.5%, rgba(207, 0, 121, 0.75)), color-stop(50%, #cf0079), color-stop(52.5%, rgba(207, 0, 121, 0.75)), to(rgba(207, 0, 121, 0)));
+    background-image: linear-gradient(to right, rgba(207, 0, 121, 0)0%, rgba(207, 0, 121, 0.75)47.5%, #cf0079 50%, rgba(207, 0, 121, 0.75)52.5%, rgba(207, 0, 121, 0)100%);
+    background-position: 50% 50%;
+    background-size: 200% 100%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    -webkit-animation: sectionSeparator 2s ease-in-out alternate infinite both;
+    animation: sectionSeparator 2s ease-in-out alternate infinite both;
+    bottom: -40px;
+}
+
+@-webkit-keyframes sectionSeparator {
+    from {
+        background-position: 0 50%
+    }
+
+    to {
+        background-position: 100% 50%
+    }
+}
+
+@keyframes sectionSeparator {
+    from {
+        background-position: 0 50%
+    }
+
+    to {
+        background-position: 100% 50%
+    }
+}
+.section:not(:last-child) {
+    position: relative;
+    margin-bottom: 70px
+}
+
+
+.game-card {
+    border: 1px solid;
+    padding: 10px;
+    text-align: center;
+    min-height: 240px;
+    margin-bottom: 20px;
+}
+.card-title {
+    min-height: 60px;
+}
+.img-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+input[type="submit"] {
+    background-image: linear-gradient(to right top, #013230, #014c49, #016763, #01847f, #02a29b);
+    border: none;
+    padding: 5px;
+}
+input#UserInput {
+    background-color: #464646;
+    border-color: #00a39b;
+    color: #fff;
+    border-radius: 0px;
+}
+button.btn.btn-default {
+    background-color: #333;
+    border-color: #00a39b;
+    color: #fff;
+}
+    button.btn.btn-default:focus {
+        outline: 0;
+        background-color: #02a29b;
+    }
+    .btn-default:active:hover, .btn-default.active:hover, .open > .dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open > .dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open > .dropdown-toggle.btn-default.focus {
+        color: #fff;
+        background-color: #02a29b;
+        border-color: #02a29b;
+        outline: 0;
+    }
+.input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group {
+    border-radius: 0px;
+}
+
+footer {
+    margin-top: 100px;
+}
+span.socials a {
+    margin-left: 6px;
+    margin-right: 6px;
+    font-size: 21px;
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
     .navbar-nav > li > a {
         /* (80px - line-height of 27px) / 2 = 26.5px */
         padding-top: 26.5px;
@@ -63,13 +209,13 @@
     }
 }
 
-#homeCarousel {
-    width : 50%;
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
 }
 
-.game-card {
-    border: 1px solid;
-    border-radius: 25px;
-    padding: 15px;
-    margin: 5px;
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+    #homeMainImage {
+    min-height: 800px;
+    }
 }

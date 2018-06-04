@@ -2,9 +2,9 @@
     <div class="row">
         @foreach (var game in (dynamic)TempData["SearchResults"])
         {
-            <div class="col-sm-2">
-                <div class="card bg-warning game-card mx-auto">
-                    <img src="@game.Cover.Url" alt="Card image cap">
+            <div class="col-sm-3">
+                <div class="card game-card mx-auto">
+                    <img src="@game.Cover.Url" alt="Card image cap" class="img-responsive img-center">
                     <div class="card-body">
                         <h5 class="card-title">@game.Name</h5>
                         <p class="card-text"></p>
