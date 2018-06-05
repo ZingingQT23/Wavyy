@@ -4,6 +4,13 @@
 
 <div class="container">
     <div class="card">
-<img src="@thisGame.Cover.Url" />
+        @*TODO: Search Context for Cover image url*@
+        <img src="" />
     </div> 
+</div>
+
+<h2>@thisGame.Name</h2>
+
+<div>
+    <form asp-controller="Game" asp-action="AddToMyGames" method="post"><input type="hidden" name="gameId" value="@thisGame.ID"/><input type="submit" value="Add to My Games"/></form>
 </div>
