@@ -6,6 +6,5 @@ namespace Wavyy.Models.Games
     {
         public int ID { get; set; }
         public List<UserGame> UserGames { get; set; }
-        public int ApplicationUserID { get; set; }
     }
 }
