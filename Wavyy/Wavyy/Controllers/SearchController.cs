@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Wavyy.Data;
 using Wavyy.Models;
 using Wavyy.Models.Games;
 
@@ -19,6 +20,12 @@ namespace Wavyy.Controllers
         private const string byId = "/games/{0}?fields=name,id,slug,summary,cover,platforms,esrb,pegi,storyline,first_release_date,screenshots,artworks,genres,developers,publishers";
         private const string forVersions = "/game_versions/?fields=games.name&filter[games][exists]=1&filter[game][eq]={0}&expand=games";
 
+        private readonly WavyyDbContext context;
+
+        public SearchController(WavyyDbContext dbContext)
+        {
+            context = dbContext;
+        }
 
         private static void CheckClient()
         {
@@ -62,14 +69,16 @@ namespace Wavyy.Controllers
 
                 List<AddGameViewModel> addGameViewModel = JsonConvert.DeserializeObject<List<AddGameViewModel>>(json);
 
+                //TODO: Create PlatformGames, PublisherGames, GenreGames, DeveloperGames, GameImages and add them to the dbcontext
+
                 Game newGame = new Game(addGameViewModel[0]);
 
                 searchResults.Add(newGame);
 
-                //TODO: context.Games.Add(newGame);
+                context.Games.Add(newGame);
             }
 
-            //TODO: context.SaveChanges();
+            context.SaveChanges();
 
             return searchResults;
         }
@@ -98,7 +107,6 @@ namespace Wavyy.Controllers
         public async Task<IActionResult> SingleGame(int id)
         {
             //TODO: Convert these requests to query the dbcontext instead of the api
-
 
             string json = await MakeRequest(string.Format(byId, id));
 
