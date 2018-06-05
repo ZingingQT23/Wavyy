@@ -19,8 +19,8 @@ namespace Wavyy.Models.Games
         public GameImage Cover { get; set; }
         [JsonProperty(PropertyName = "platforms")]
         public List<int> Platforms { get; set; }
-        //[JsonProperty(PropertyName = "first_release_date")]
-        //public int FirstReleaseDate { get; set; }
+        [JsonProperty(PropertyName = "first_release_date")]
+        public string FirstReleaseDate { get; set; }
         [JsonProperty(PropertyName = "storyline")]
         public string Storyline { get; set; }
         [JsonProperty(PropertyName = "esrb")]
