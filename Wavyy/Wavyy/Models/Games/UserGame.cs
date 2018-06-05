@@ -7,5 +7,8 @@
         public int UserID { get; set; }
         public int PlatformId { get; set; }
         public int VersionId { get; set; }
+
+        public UserGame() { }
+
     }
 }
