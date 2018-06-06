@@ -58,18 +58,63 @@ namespace Wavyy.Controllers
             return result;
         }
 
+        private async void PopulateRelationships(AddGameViewModel addGameViewModel)
+        {
+            if (addGameViewModel.Cover != null)
+            {
+                GameImage newCover = addGameViewModel.Cover;
+                newCover.Type = "cover";
+
+                context.GameImages.Add(newCover);
+            }
+
+            if (addGameViewModel.Artworks != null)
+            {
+                foreach (GameImage img in addGameViewModel.Artworks)
+                {
+                    GameImage newArtwork = img;
+                    newArtwork.Type = "artwork";
+
+                    context.GameImages.Add(newArtwork);
+                }
+            }
+
+            if (addGameViewModel.Screenshots != null)
+            {
+                foreach (GameImage img in addGameViewModel.Screenshots)
+                {
+                    GameImage newScreenshot = img;
+                    newScreenshot.Type = "screenshot";
+
+                    context.GameImages.Add(newScreenshot);
+                }
+            }
+
+            //TODO: Create Platforms, PlatformGames, Publishers, PublisherGames, Genres, GenreGames, Developers, DeveloperGames, and add them to the dbcontext
+
+            if (addGameViewModel.Platforms != null)
+            {
+                //TODO: Check if the platforms exist in the platforms table, if not, MakeRequest for the platform, populate it, and add it to the context
+                
+            }
+
+            context.SaveChanges();
+        }
+
         public async Task<List<Game>> PopulateGames(List<DbId> dbIds)
         {
             List<Game> searchResults = new List<Game>();
 
-            //TODO: check if items with those DbIds exist already in local db, if yes, add to searchResults, for the rest:
+            
             foreach (DbId dbId in dbIds)
             {
+                //TODO: check if items with those DbIds exist already in local db, if yes, add to searchResults, for the rest:
+
                 string json = await MakeRequest(string.Format(byId, dbId.Id));
 
                 List<AddGameViewModel> addGameViewModel = JsonConvert.DeserializeObject<List<AddGameViewModel>>(json);
 
-                //TODO: Create PlatformGames, PublisherGames, GenreGames, DeveloperGames, GameImages and add them to the dbcontext
+                PopulateRelationships(addGameViewModel[0]);
 
                 Game newGame = new Game(addGameViewModel[0]);
 
