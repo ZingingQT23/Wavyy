@@ -29,11 +29,14 @@ namespace Wavyy.Controllers
         [HttpPost]
         public IActionResult AddToMyGames(int gameId)
         {
-            string currentUserId = User.Identity.GetUserId();
+            string userId = User.Identity.GetUserId();
 
-            //TODO: if null redirect to login page
-            int userId = Int32.Parse(currentUserId);
-            ApplicationUser currentUser = context.Users.FirstOrDefault(x => x.Id == currentUserId);
+            if (userId == null)
+            {
+                return Redirect("/Account/Login");
+            }
+
+            ApplicationUser currentUser = context.Users.FirstOrDefault(x => x.Id == userId);
 
             UserGame newUserGame = new UserGame();
             newUserGame.GameID = gameId;
