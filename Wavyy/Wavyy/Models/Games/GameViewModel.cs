@@ -9,6 +9,8 @@ namespace Wavyy.Models.Games
         public int PlatformId { get; set; }
         public int VersionId { get; set; }
 
+        public GameViewModel() { }
+
         public GameViewModel(UserGame userGame)
         {
             GameID = userGame.GameID;
