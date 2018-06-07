@@ -348,7 +348,7 @@ namespace Wavyy.Migrations
 
                     b.Property<int>("UserGameID");
 
-                    b.Property<int>("UserID");
+                    b.Property<string>("UserID");
 
                     b.HasKey("ID");
 
@@ -364,7 +364,7 @@ namespace Wavyy.Migrations
 
                     b.Property<int>("PlatformId");
 
-                    b.Property<int>("UserID");
+                    b.Property<string>("UserID");
 
                     b.Property<int>("VersionId");
 

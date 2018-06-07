@@ -11,7 +11,7 @@ using Wavyy.Data;
 namespace Wavyy.Migrations
 {
     [DbContext(typeof(WavyyDbContext))]
-    [Migration("20180605201853_InitialMigration")]
+    [Migration("20180607193932_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -349,7 +349,7 @@ namespace Wavyy.Migrations
 
                     b.Property<int>("UserGameID");
 
-                    b.Property<int>("UserID");
+                    b.Property<string>("UserID");
 
                     b.HasKey("ID");
 
@@ -365,7 +365,7 @@ namespace Wavyy.Migrations
 
                     b.Property<int>("PlatformId");
 
-                    b.Property<int>("UserID");
+                    b.Property<string>("UserID");
 
                     b.Property<int>("VersionId");
 

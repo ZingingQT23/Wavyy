@@ -206,7 +206,7 @@ namespace Wavyy.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CollectionID = table.Column<int>(nullable: false),
                     UserGameID = table.Column<int>(nullable: false),
-                    UserID = table.Column<int>(nullable: false)
+                    UserID = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -221,7 +221,7 @@ namespace Wavyy.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     GameID = table.Column<int>(nullable: false),
                     PlatformId = table.Column<int>(nullable: false),
-                    UserID = table.Column<int>(nullable: false),
+                    UserID = table.Column<string>(nullable: true),
                     VersionId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
