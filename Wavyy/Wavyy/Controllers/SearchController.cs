@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -58,13 +59,13 @@ namespace Wavyy.Controllers
             return result;
         }
 
-        private async void PopulateRelationships(AddGameViewModel addGameViewModel)
+        private async void PopulateRelationships(AddGameViewModel addGameViewModel, int gameId)
         {
             if (addGameViewModel.Cover != null)
             {
                 GameImage newCover = addGameViewModel.Cover;
                 newCover.Type = "cover";
-
+                newCover.GameID = gameId;
                 context.GameImages.Add(newCover);
             }
 
@@ -74,7 +75,7 @@ namespace Wavyy.Controllers
                 {
                     GameImage newArtwork = img;
                     newArtwork.Type = "artwork";
-
+                    newArtwork.GameID = gameId;
                     context.GameImages.Add(newArtwork);
                 }
             }
@@ -85,7 +86,7 @@ namespace Wavyy.Controllers
                 {
                     GameImage newScreenshot = img;
                     newScreenshot.Type = "screenshot";
-
+                    newScreenshot.GameID = gameId;
                     context.GameImages.Add(newScreenshot);
                 }
             }
@@ -114,13 +115,20 @@ namespace Wavyy.Controllers
 
                 List<AddGameViewModel> addGameViewModel = JsonConvert.DeserializeObject<List<AddGameViewModel>>(json);
 
-                PopulateRelationships(addGameViewModel[0]);
+                if (addGameViewModel[0].Cover == null)
+                {
+                    continue;
+                }
 
                 Game newGame = new Game(addGameViewModel[0]);
 
                 searchResults.Add(newGame);
 
                 context.Games.Add(newGame);
+
+                newGame = context.Games.Where(x => x.DbId == dbId.Id).FirstOrDefault<Game>();
+
+                PopulateRelationships(addGameViewModel[0], newGame.ID);
             }
 
             context.SaveChanges();
@@ -149,19 +157,6 @@ namespace Wavyy.Controllers
             return View("Index");
         }
 
-        public async Task<IActionResult> SingleGame(int id)
-        {
-            //TODO: Convert these requests to query the dbcontext instead of the api
 
-            string json = await MakeRequest(string.Format(byId, id));
-
-            List<AddGameViewModel> addGameViewModel = JsonConvert.DeserializeObject<List<AddGameViewModel>>(json);
-
-            Game thisGame = new Game(addGameViewModel[0]);
-
-            TempData["ThisGame"] = thisGame;
-
-            return View();
-        }
     }
 }
