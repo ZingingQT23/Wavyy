@@ -122,13 +122,15 @@ namespace Wavyy.Controllers
 
                 Game newGame = new Game(addGameViewModel[0]);
 
-                searchResults.Add(newGame);
-
                 context.Games.Add(newGame);
+
+                context.SaveChanges();
 
                 newGame = context.Games.Where(x => x.DbId == dbId.Id).FirstOrDefault<Game>();
 
                 PopulateRelationships(addGameViewModel[0], newGame.ID);
+
+                searchResults.Add(newGame);
             }
 
             context.SaveChanges();
@@ -150,7 +152,19 @@ namespace Wavyy.Controllers
 
             List<DbId> dbIds = JsonConvert.DeserializeObject<List<DbId>>(json);
 
-            List<Game> searchResults = await PopulateGames(dbIds);
+            List<Game> results = await PopulateGames(dbIds);
+
+            List<GameViewModel> searchResults = new List<GameViewModel>();
+
+            foreach (Game game in results)
+            {
+                GameViewModel gameViewModel = new GameViewModel();
+                gameViewModel.Name = game.Name;
+                gameViewModel.GameID = game.ID;
+                gameViewModel.Cover = context.GameImages.Where(x => x.GameID == game.ID).Where(x => x.Type == "cover").FirstOrDefault();
+
+                searchResults.Add(gameViewModel);
+            }
 
             TempData["SearchResults"] = searchResults;
 
