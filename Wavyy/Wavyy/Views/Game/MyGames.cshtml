@@ -8,9 +8,9 @@
         {
             <div class="col-sm-3">
                 <div class="card game-card mx-auto">
-                    @*<img src="@game.CoverUrl" alt="Card image cap" class="img-responsive img-center">*@
+                    <img src="@game.Cover.Url" alt="Card image cap" class="img-responsive img-center">
                     <div class="card-body">
-                        @*<h5 class="card-title">@game.Name</h5>*@
+                        <h5 class="card-title">@game.Name</h5>
                         <p class="card-text"></p>
                         <form asp-controller="Game" asp-action="SingleGame" method="get"><input type="hidden" name="id" value="@game.GameID"><input type="submit" value="View Game"></form>
                     </div>
