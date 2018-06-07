@@ -40,16 +40,7 @@ namespace Wavyy.Controllers
             {
                 GameViewModel userGameViewModel = new GameViewModel(game);
 
-                //var cover = context.GameImages.Where(x => x.GameID == userGameViewModel.GameID).Where(x => x.Type == "cover").FirstOrDefault().Url;
-
-                //if (cover != null)
-                //{
-                //    string coverUrl = cover.ToString();
-                //    userGameViewModel.CoverUrl = coverUrl;
-                //} else
-                //{
-                //    userGameViewModel.CoverUrl = "";
-                //}
+                userGameViewModel.Cover = context.GameImages.Where(x => x.GameID == userGameViewModel.GameID).Where(x => x.Type == "cover").FirstOrDefault();
 
                 myGames.Add(userGameViewModel);
             }
