@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <h5 class="card-title">@game.Name</h5>
                         <p class="card-text"></p>
-                        <form asp-controller="Search" asp-action="SingleGame" method="get"><input type="hidden" name="id" value="@game.DbId"><input type="submit" value="View Game"></form>
+                        <form asp-controller="Game" asp-action="SingleGame" method="get"><input type="hidden" name="id" value="@game.ID"><input type="submit" value="View Game"></form>
                     </div>
                 </div>
             </div>
